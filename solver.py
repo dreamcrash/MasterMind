@@ -1,20 +1,24 @@
 import itertools
 
 
+def get_symbols_on_correct_position(guess, potential_match):
+    corrects = list()
+    for g_c, p_c in zip(guess, potential_match):
+        if g_c == p_c:
+            corrects.append(g_c)
+    return corrects
+
+
 def is_potential_match(correct_positions, correct_symbols, guess, potential_match):
     guess = list(guess)
     potential_match = list(potential_match)
-    index = 0
-    c_pos = 0
-    while index < len(potential_match):
-        if guess[index] == potential_match[index]:
-            del guess[index]
-            del potential_match[index]
-            c_pos = c_pos + 1
-        else:
-            index = index + 1
-    if c_pos != correct_positions:
+    corrects = get_symbols_on_correct_position(guess, potential_match)
+    if len(corrects) != correct_positions:
         return False
+
+    for c in corrects:
+        guess.remove(c)
+        potential_match.remove(c)
 
     c_symbols = 0
     for c in guess:
@@ -53,7 +57,7 @@ def game(number_of_symbols, number_of_slots):
 
 
 if __name__ == '__main__':
-    game(6, 4)
+    game(8, 6)
 
 
 
