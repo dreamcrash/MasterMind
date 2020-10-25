@@ -39,40 +39,40 @@ class MasterMindTestCase(unittest.TestCase):
     def test_potential_matches_with_only_one_possible_match(self):
         valid_symbols = {'a', 'b', 'c'}
         combinations = [p for p in itertools.product(valid_symbols, repeat=3)]
-        get_potential_matches(3, 0, "abc", combinations)
-        self.assertEqual([('a', 'b', 'c')], combinations)
+        matches = get_potential_matches(3, 0, "abc", combinations)
+        self.assertEqual([('a', 'b', 'c')], matches)
 
     def test_potential_matches_impossible_case_1(self):
         valid_symbols = {'a', 'b', 'c'}
         combinations = [p for p in itertools.product(valid_symbols, repeat=3)]
-        get_potential_matches(0, 1, "aaa", combinations)
-        self.assertEqual([], combinations)
+        matches = get_potential_matches(0, 1, "aaa", combinations)
+        self.assertEqual([], matches)
 
     def test_potential_matches_impossible_case_2(self):
         valid_symbols = {'a', 'b', 'c'}
         combinations = [p for p in itertools.product(valid_symbols, repeat=3)]
-        get_potential_matches(0, 0, "abc", combinations)
-        self.assertEqual([], combinations)
+        matches = get_potential_matches(0, 0, "abc", combinations)
+        self.assertEqual([], matches)
 
     def test_potential_matches_one_possible_match(self):
         valid_symbols = {'a', 'b', 'c'}
         combinations = [p for p in itertools.product(valid_symbols, repeat=3)]
-        get_potential_matches(3, 0, "abc", combinations)
-        self.assertEqual([('a', 'b', 'c')], combinations)
+        matches = get_potential_matches(3, 0, "abc", combinations)
+        self.assertEqual([('a', 'b', 'c')], matches)
 
     def test_potential_matches_two_possible_match(self):
         valid_symbols = {'a', 'b', 'c'}
         combinations = [p for p in itertools.product(valid_symbols, repeat=3)]
         combinations.sort()
-        get_potential_matches(0, 3, "abc", combinations)
-        self.assertEqual([('b', 'c', 'a'), ('c', 'a', 'b')], combinations)
+        matches = get_potential_matches(0, 3, "abc", combinations)
+        self.assertEqual([('b', 'c', 'a'), ('c', 'a', 'b')], matches)
 
     def test_potential_matches_three_possible_match(self):
         valid_symbols = {'a', 'b', 'c'}
         combinations = [p for p in itertools.product(valid_symbols, repeat=3)]
         combinations.sort()
-        get_potential_matches(1, 0, "abc", combinations)
-        self.assertEqual([('a', 'a', 'a'), ('b', 'b', 'b'), ('c', 'c', 'c')], combinations)
+        matches = get_potential_matches(1, 0, "abc", combinations)
+        self.assertEqual([('a', 'a', 'a'), ('b', 'b', 'b'), ('c', 'c', 'c')], matches)
 
 
 if __name__ == '__main__':

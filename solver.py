@@ -25,13 +25,8 @@ def is_potential_match(correct_positions, correct_symbols, guess, potential_matc
     return c_symbols == correct_symbols
 
 
-def remove_non_potential_matches(correct_positions, correct_symbols, guess, combinations):
-    index = 0
-    while index < len(combinations):
-        if is_potential_match(correct_positions, correct_symbols, guess, combinations[index]):
-            index = index + 1
-        else:
-            del combinations[index]
+def get_potential_matches(correct_positions, correct_symbols, guess, codes):
+    return list(filter(lambda code: is_potential_match(correct_positions, correct_symbols, guess, code), codes))
 
 
 def generate_symbols(number):
@@ -47,19 +42,18 @@ def game(number_of_symbols, number_of_slots):
     total_combinations = len(combinations)
     print("Total combinations : ", total_combinations)
     while found != "yes":
-
+        print("Try this one : ", combinations[0])
         guess = input("What was the guess?")
         correct_pos = int(input("How many positions are correct ?"))
         correct_symbol = int(input("How many symbols are correct, but on wrong position ?"))
-        remove_non_potential_matches(correct_pos, correct_symbol, guess, combinations)
+        combinations = get_potential_matches(correct_pos, correct_symbol, guess, combinations)
         total_combinations = len(combinations)
         print("Total combinations : ", total_combinations)
         found = input("Did you find ?")
-        print("Try this one : ", combinations[0])
 
 
 if __name__ == '__main__':
-    game(3, 3)
+    game(6, 4)
 
 
 
