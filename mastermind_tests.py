@@ -1,6 +1,6 @@
 import itertools
 import unittest
-from solver import generate_symbols, is_potential_match, remove_non_potential_matches
+from solver import generate_symbols, is_potential_match, get_potential_matches
 
 
 class MasterMindTestCase(unittest.TestCase):
@@ -39,43 +39,39 @@ class MasterMindTestCase(unittest.TestCase):
     def test_potential_matches_with_only_one_possible_match(self):
         valid_symbols = {'a', 'b', 'c'}
         combinations = [p for p in itertools.product(valid_symbols, repeat=3)]
-        remove_non_potential_matches(3, 0, "abc", combinations)
+        get_potential_matches(3, 0, "abc", combinations)
         self.assertEqual([('a', 'b', 'c')], combinations)
 
     def test_potential_matches_impossible_case_1(self):
         valid_symbols = {'a', 'b', 'c'}
         combinations = [p for p in itertools.product(valid_symbols, repeat=3)]
-        print(combinations)
-        remove_non_potential_matches(0, 1, "aaa", combinations)
+        get_potential_matches(0, 1, "aaa", combinations)
         self.assertEqual([], combinations)
 
     def test_potential_matches_impossible_case_2(self):
         valid_symbols = {'a', 'b', 'c'}
         combinations = [p for p in itertools.product(valid_symbols, repeat=3)]
-        print(combinations)
-        remove_non_potential_matches(0, 0, "abc", combinations)
+        get_potential_matches(0, 0, "abc", combinations)
         self.assertEqual([], combinations)
 
     def test_potential_matches_one_possible_match(self):
         valid_symbols = {'a', 'b', 'c'}
         combinations = [p for p in itertools.product(valid_symbols, repeat=3)]
-        print(combinations)
-        remove_non_potential_matches(3, 0, "abc", combinations)
+        get_potential_matches(3, 0, "abc", combinations)
         self.assertEqual([('a', 'b', 'c')], combinations)
 
     def test_potential_matches_two_possible_match(self):
         valid_symbols = {'a', 'b', 'c'}
         combinations = [p for p in itertools.product(valid_symbols, repeat=3)]
         combinations.sort()
-        print(combinations)
-        remove_non_potential_matches(0, 3, "abc", combinations)
+        get_potential_matches(0, 3, "abc", combinations)
         self.assertEqual([('b', 'c', 'a'), ('c', 'a', 'b')], combinations)
 
     def test_potential_matches_three_possible_match(self):
         valid_symbols = {'a', 'b', 'c'}
         combinations = [p for p in itertools.product(valid_symbols, repeat=3)]
         combinations.sort()
-        remove_non_potential_matches(1, 0, "abc", combinations)
+        get_potential_matches(1, 0, "abc", combinations)
         self.assertEqual([('a', 'a', 'a'), ('b', 'b', 'b'), ('c', 'c', 'c')], combinations)
 
 
