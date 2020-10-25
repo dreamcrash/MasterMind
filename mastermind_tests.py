@@ -1,6 +1,7 @@
 import itertools
 import unittest
-from solver import generate_symbols, is_potential_match, get_potential_matches, get_symbols_on_correct_position
+from solver import generate_symbols, is_potential_match, get_potential_matches, get_symbols_on_correct_position, \
+    get_total_correct_symbols
 
 
 class MasterMindTestCase(unittest.TestCase):
@@ -85,6 +86,18 @@ class MasterMindTestCase(unittest.TestCase):
     def test_get_symbols_on_correct_position_one_match(self):
         corrects = get_symbols_on_correct_position("abc", "aaa")
         self.assertEqual(['a'], corrects)
+
+    def test_get_total_correct_symbols(self):
+        correct_symbols = get_total_correct_symbols(['a', 'a', 'a'], ['a', 'b', 'a'])
+        self.assertEqual(2,  correct_symbols)
+
+    def test_get_total_correct_symbols_all_match(self):
+        correct_symbols = get_total_correct_symbols(['a', 'a', 'a'], ['a', 'a', 'a'])
+        self.assertEqual(3,  correct_symbols)
+
+    def test_get_total_correct_symbols_no_match(self):
+        correct_symbols = get_total_correct_symbols(['a', 'a', 'a'], ['b', 'b', 'c'])
+        self.assertEqual(0, correct_symbols)
 
 
 if __name__ == '__main__':

@@ -9,24 +9,25 @@ def get_symbols_on_correct_position(guess, potential_match):
     return corrects
 
 
+def get_total_correct_symbols(guess, potential_match):
+    for c in guess:
+        if c in potential_match:
+            potential_match.remove(c)
+    return len(guess) - len(potential_match)
+
+
 def is_potential_match(correct_positions, correct_symbols, guess, potential_match):
-    guess = list(guess)
-    potential_match = list(potential_match)
     corrects = get_symbols_on_correct_position(guess, potential_match)
     if len(corrects) != correct_positions:
         return False
 
+    guess = list(guess)
+    potential_match = list(potential_match)
     for c in corrects:
         guess.remove(c)
         potential_match.remove(c)
 
-    c_symbols = 0
-    for c in guess:
-        if c in potential_match:
-            c_symbols = c_symbols + 1
-            potential_match.remove(c)
-
-    return c_symbols == correct_symbols
+    return get_total_correct_symbols(guess, potential_match) == correct_symbols
 
 
 def get_potential_matches(correct_positions, correct_symbols, guess, codes):
