@@ -1,1 +1,1 @@
-# MasterMind
+# MasterMindPython Solver
