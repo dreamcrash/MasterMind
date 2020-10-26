@@ -31,11 +31,11 @@ def is_potential_match(correct_positions, correct_symbols, guess, potential_matc
 
 
 def get_potential_matches(correct_positions, correct_symbols, guess, codes):
-    return list(filter(lambda code: is_potential_match(correct_positions, correct_symbols, guess, code), codes))
+    return tuple(filter(lambda code: is_potential_match(correct_positions, correct_symbols, guess, code), codes))
 
 
 def generate_symbols(number):
-    return list(map(chr, range(97, 97 + number)))
+    return tuple(map(chr, range(97, 97 + number)))
 
 
 def game(number_of_symbols, number_of_slots):
